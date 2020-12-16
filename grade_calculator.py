@@ -31,6 +31,7 @@ class GradeCalculator:
         self._homework_calculator = CategoryCalculator('HW')
         self._quiz_calculator = CategoryCalculator('Quiz')
         self._current_category_calculator = None
+        self._current_assignment_number = 0
 
     def _calculate_gradescope(self) -> None:
         with open(_PATH_TO_GRADESCOPE) as file:
@@ -68,6 +69,10 @@ class GradeCalculator:
         except:
             pass
         else:
+            if self._current_category_calculator == self._quiz_calculator:
+                if self._current_assignment_number >= 4:
+                    numerator = min(numerator, 5)
+                    denominator = 5
             self._current_category_calculator.add_assignment(
                 numerator, denominator)
 
@@ -76,6 +81,10 @@ class GradeCalculator:
             self._current_category_calculator = self._homework_calculator
         elif line.startswith(self._quiz_calculator.description()):
             self._current_category_calculator = self._quiz_calculator
+        try:
+            self._current_assignment_number = int(line.split()[-1])
+        except:
+            pass
 
 
 if __name__ == '__main__':
