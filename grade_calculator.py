@@ -1,4 +1,6 @@
-# Mihir Thanekar
+# Author: Mihir Thanekar
+# Run this file as a script by typing python grade_calculator.py in the terminal.
+# Make sure to copy your grades from gradescope into the grades_from_gradescope.txt file.
 _PATH_TO_GRADESCOPE = 'grades_from_gradescope.txt'
 
 
